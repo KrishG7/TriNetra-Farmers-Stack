@@ -1,0 +1,6 @@
+id,phone,name,email,district,state,created_at,updated_at,is_active
+f1a2b3c4-d5e6-7f8g-9h0i-j1k2l3m4n5o6,9876543210,Rajesh Kumar,rajesh@example.com,Jaipur,Rajasthan,2024-01-15 10:30:00,2024-01-15 10:30:00,true
+f2b3c4d5-e6f7-8g9h-0i1j-k2l3m4n5o6p7,9876543211,Priya Singh,priya@example.com,Indore,Madhya Pradesh,2024-02-20 14:20:00,2024-02-20 14:20:00,true
+f3c4d5e6-f7g8-9h0i-1j2k-l3m4n5o6p7q8,9876543212,Amit Patel,amit@example.com,Nagpur,Maharashtra,2024-03-10 09:15:00,2024-03-10 09:15:00,true
+f4d5e6f7-g8h9-0i1j-2k3l-m4n5o6p7q8r9,9876543213,Sunita Devi,,Ludhiana,Punjab,2024-04-05 16:45:00,2024-04-05 16:45:00,true
+f5e6f7g8-h9i0-1j2k-3l4m-n5o6p7q8r9s0,9876543214,Mohan Sharma,mohan@example.com,Jaipur,Rajasthan,2024-05-12 11:00:00,2024-05-12 11:00:00,true

@@ -1,0 +1,37 @@
+{
+  "FARM_9781301215_1768923352": {
+    "farmer_id": "FARM_9781301215_1768923352",
+    "name": "Ramesh Kumar",
+    "state": "Punjab",
+    "district": "Ludhiana",
+    "phone": "9781301215",
+    "language": "en",
+    "created_at": "2026-01-20T21:05:52.325005",
+    "verified": false
+  },
+  "FARM_9876543210_1768923424": {
+    "farmer_id": "FARM_9876543210_1768923424",
+    "name": "Ramesh Kumar",
+    "state": "Maharashtra",
+    "district": "Pune",
+    "phone": "9876543210",
+    "language": "en",
+    "created_at": "2026-01-20T21:07:04.150455",
+    "verified": true,
+    "last_login": "2026-01-20T21:52:59.179711"
+  },
+  "FARM_7889782682": {
+    "farmer_id": "FARM_7889782682",
+    "name": "New Farmer",
+    "phone": "7889782682",
+    "state": "Unknown",
+    "district": "Unknown"
+  },
+  "FARM_1234567890": {
+    "farmer_id": "FARM_1234567890",
+    "name": "New Farmer",
+    "phone": "1234567890",
+    "state": "Unknown",
+    "district": "Unknown"
+  }
+}

@@ -1,0 +1,6 @@
+id,farm_id,crop_name,area_acres,planting_date,expected_harvest_date,season,created_at
+crop-001,farm-001,wheat,2.5,2024-11-15,2025-04-15,Rabi,2024-11-15 08:00:00
+crop-002,farm-002,cotton,1.8,2024-06-01,2024-12-15,Kharif,2024-06-01 08:00:00
+crop-003,farm-003,soybean,3.2,2024-07-10,2024-11-20,Kharif,2024-07-10 08:00:00
+crop-004,farm-004,rice,2.0,2024-06-20,2024-11-30,Kharif,2024-06-20 08:00:00
+crop-005,farm-005,wheat,4.5,2024-11-01,2025-04-10,Rabi,2024-11-01 08:00:00

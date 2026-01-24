@@ -1,0 +1,6 @@
+id,farm_id,test_date,n_value,p_value,k_value,ph_value,organic_carbon,electrical_conductivity,test_method,lab_name,created_at
+soil-001,farm-001,2024-12-01,45.5,22.3,18.7,7.2,0.65,0.42,Colorimetric,ICAR Lab Jaipur,2024-12-01 10:00:00
+soil-002,farm-002,2024-11-15,38.2,18.5,15.2,6.8,0.52,0.38,Colorimetric,ICAR Lab Jaipur,2024-11-15 10:00:00
+soil-003,farm-003,2024-10-20,52.0,25.8,22.1,7.5,0.72,0.45,Colorimetric,ICAR Lab Indore,2024-10-20 10:00:00
+soil-004,farm-004,2024-09-10,35.0,16.0,12.5,6.5,0.48,0.35,Colorimetric,ICAR Lab Nagpur,2024-09-10 10:00:00
+soil-005,farm-005,2024-12-05,48.5,28.0,20.5,7.8,0.68,0.48,Colorimetric,PAU Lab Ludhiana,2024-12-05 10:00:00

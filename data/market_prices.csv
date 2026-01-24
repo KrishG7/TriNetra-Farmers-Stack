@@ -1,0 +1,7 @@
+id,crop,mandi_name,district,state,price,unit,price_date,arrival_quantity,weather_condition,source,created_at
+price-001,wheat,Jaipur Mandi,Jaipur,Rajasthan,2450.00,quintal,2025-01-20,1250.0,Clear,agmark,2025-01-20 08:00:00
+price-002,wheat,Indore Mandi,Indore,Madhya Pradesh,2480.00,quintal,2025-01-20,980.5,Cloudy,agmark,2025-01-20 08:00:00
+price-003,wheat,Ludhiana Mandi,Ludhiana,Punjab,2520.00,quintal,2025-01-20,1580.0,Clear,agmark,2025-01-20 08:00:00
+price-004,cotton,Nagpur Mandi,Nagpur,Maharashtra,6800.00,quintal,2025-01-20,450.0,Clear,agmark,2025-01-20 08:00:00
+price-005,rice,Indore Mandi,Indore,Madhya Pradesh,3200.00,quintal,2025-01-20,720.5,Rainy,agmark,2025-01-20 08:00:00
+price-006,soybean,Indore Mandi,Indore,Madhya Pradesh,4500.00,quintal,2025-01-20,650.0,Clear,agmark,2025-01-20 08:00:00
