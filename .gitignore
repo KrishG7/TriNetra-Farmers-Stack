@@ -1,8 +1,56 @@
-# --- SECRETS ---
-service_account.json
+# ===========================
+# 🔐 SECRETS & KEYS (CRITICAL)
+# ===========================
 .env
+.env.local
+.env.*.local
+service_account.json
+key.json
+secrets/
+
+# ===========================
+# 🐍 PYTHON & BACKEND
+# ===========================
 __pycache__/
-*.pyc
-.DS_Store
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.pytest_cache/
+.coverage
+
+# ===========================
+# ⚛️ FRONTEND (NEXT.JS / NODE)
+# ===========================
 node_modules/
 .next/
+out/
+build/
+dist/
+.npm/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===========================
+# 🧠 AI MODELS & DATA (TOO LARGE)
+# ===========================
+# Ignore large PyTorch models & Scalers (re-train them locally instead)
+*.pth
+*.pkl
+app/models/*.pth
+app/models/*.pkl
+
+# Ignore raw Mac Numbers files (Binary garbage)
+*.numbers
+
+# ===========================
+# 🛠️ SYSTEM & IDE FILES
+# ===========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

@@ -1,17 +1,33 @@
-# TriNetra Backend API
+# 🌾 TriNetra: Agri-Intelligence Command Center
 
-## Development Mode (CSV Storage)
+TriNetra is an AI-powered platform designed to empower Indian farmers with real-time intelligence. It combines Satellite Imagery, Machine Learning, and Generative AI to solve three critical agricultural challenges:
 
-Current setup uses **CSV files** for data storage. This allows development without database setup.
+1.  **Market Vision:** Predicting crop prices using historical Agmarknet data (PyTorch).
+2.  **Soil Vision:** AI Agronomist for crop recommendations (Gemini AI).
+3.  **Credit Vision:** Satellite-based farm verification for loans (Google Earth Engine).
 
-### Quick Start
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Backend Setup (Python)
+
+**Prerequisites:** Python 3.9+
 
 ```bash
-# 1. Install dependencies
-pip install fastapi uvicorn pydantic python-dotenv
+# 1. Create a virtual environment (Optional but recommended)
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 2. Make sure CSV files are in data/ directory
-ls data/
+# 2. Install Dependencies
+pip install -r requirements.txt
 
-# 3. Run the server
-./run.sh
+# 3. Setup Environment Variables
+# Create a .env file in the root directory and add:
+# GEMINI_API_KEY="your_google_ai_key_here"
+
+# 4. Check Data
+# Ensure your CSV files (Wheat.csv, etc.) are inside the /data folder.
+
+# 5. Start the Server
+python run.py

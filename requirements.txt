@@ -51,3 +51,5 @@ passlib[bcrypt]
 jinja2
 google-generativeai
 pydantic-settings
+torch
+flask-cors

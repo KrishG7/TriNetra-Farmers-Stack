@@ -3,4 +3,4 @@ sat-001,farm-001,2025-01-01,0.72,Excellent,5.2,https://earthengine.google.com/..
 sat-002,farm-001,2025-01-08,0.75,Excellent,3.1,https://earthengine.google.com/...,sentinel-2,2025-01-09 10:00:00,2025-01-09 10:00:00
 sat-003,farm-001,2025-01-15,0.68,Good,8.5,https://earthengine.google.com/...,sentinel-2,2025-01-16 10:00:00,2025-01-16 10:00:00
 sat-004,farm-002,2025-01-01,0.55,Moderate,12.0,https://earthengine.google.com/...,sentinel-2,2025-01-02 10:00:00,2025-01-02 10:00:00
-sat-005,farm-003,2025-01-01,0.80,Excellent,2.8,https://earthengine.google.com/...,sentinel-2,2025-01-02 10:00:00,2025-01-02 10:00:00
+sat-005,farm-003,2025-01-01,0.8,Excellent,2.8,https://earthengine.google.com/...,sentinel-2,2025-01-02 10:00:00,2025-01-02 10:00:00

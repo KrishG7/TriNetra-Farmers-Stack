@@ -1,6 +1,7 @@
 import uvicorn
 from app.core.config import settings
 
+
 if __name__ == "__main__":
     # Ensure data directory exists
     settings.DATA_DIR.mkdir(parents=True, exist_ok=True)
