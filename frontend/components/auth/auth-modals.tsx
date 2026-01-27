@@ -84,47 +84,126 @@ export function AuthModals({
   const [registerOtpSent, setRegisterOtpSent] = useState(false)
   const [registerLoading, setRegisterLoading] = useState(false)
 
-  const handleSendLoginOtp = () => {
+  // --- LOGIN LOGIC ---
+
+  const handleSendLoginOtp = async () => {
     if (loginPhone.length !== 10) return
     setLoginLoading(true)
-    // Simulate OTP send
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/auth/login-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: loginPhone })
+      })
+
+      if (!res.ok) {
+        const err = await res.json()
+        alert(err.detail || "User not found. Please Register first!")
+        setLoginLoading(false)
+        return
+      }
+
       setLoginOtpSent(true)
+    } catch (e) {
+      alert("Connection error. Make sure backend is running!")
+    } finally {
       setLoginLoading(false)
-    }, 1000)
+    }
   }
 
-  const handleVerifyLoginOtp = () => {
+  const handleVerifyLoginOtp = async () => {
     if (loginOtp.length !== 6) return
     setLoginLoading(true)
-    // Simulate OTP verification
-    setTimeout(() => {
-      setLoginLoading(false)
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: loginPhone, otp: loginOtp })
+      })
+
+      if (!res.ok) {
+        alert("Invalid OTP (Hint: Try 123456)")
+        setLoginLoading(false)
+        return
+      }
+
+      const backendData = await res.json()
+
+      const userData = {
+        ...backendData,
+        name: backendData.name || backendData.fullName || "User"
+      }
+
+      localStorage.setItem("trinetra_user", JSON.stringify(userData))
+
       onAuthSuccess()
       onCloseLogin()
-      // Reset state
-      setLoginPhone("")
-      setLoginOtp("")
-      setLoginOtpSent(false)
-    }, 1000)
+      window.location.href = "/dashboard"
+    } catch (e) {
+      alert("Verification failed")
+    } finally {
+      setLoginLoading(false)
+    }
   }
+
+  // --- REGISTER LOGIC ---
 
   const handleSendRegisterOtp = () => {
     if (registerData.phone.length !== 10) return
     setRegisterLoading(true)
+    // Simulate Sending OTP (We trust the user for the demo)
     setTimeout(() => {
       setRegisterOtpSent(true)
       setRegisterLoading(false)
     }, 1000)
   }
 
-  const handleVerifyRegisterOtp = () => {
+  const handleVerifyRegisterOtp = async () => {
     if (registerData.otp.length !== 6) return
     setRegisterLoading(true)
-    setTimeout(() => {
+
+    // 1. Prepare data for backend
+    const payload = {
+      name: registerData.fullName,
+      phone: registerData.phone,
+      state: registerData.state,
+      district: registerData.district,
+      language: "en" // Default to English for now
+    }
+
+    try {
+      // 2. 🚀 ACTUALLY CALL THE BACKEND TO SAVE DATA
+      const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        alert("Registration Failed: " + (errorData.detail || "Unknown error"))
+        setRegisterLoading(false)
+        return
+      }
+
+      // 3. Backend saved it! Now save to Browser for UI.
+      const savedUser = await res.json()
+      
+      const userDataForLocal = {
+        name: savedUser.name,
+        phone: savedUser.phone,
+        state: savedUser.state,
+        district: savedUser.district
+      }
+      
+      localStorage.setItem("trinetra_user", JSON.stringify(userDataForLocal))
+
       setRegisterLoading(false)
       onAuthSuccess()
       onCloseRegister()
+      
       // Reset state
       setRegisterStep(1)
       setRegisterData({
@@ -137,7 +216,15 @@ export function AuthModals({
         otp: "",
       })
       setRegisterOtpSent(false)
-    }, 1000)
+
+      // 4. Reload page to show logged in state
+      window.location.href = "/dashboard"
+
+    } catch (error) {
+      console.error(error)
+      alert("Network Error: Could not connect to backend.")
+      setRegisterLoading(false)
+    }
   }
 
   const handleCloseLogin = () => {
@@ -311,19 +398,17 @@ export function AuthModals({
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex-1 flex items-center gap-2">
                   <div
-                    className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                      registerStep >= step
+                    className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${registerStep >= step
                         ? "bg-primary text-primary-foreground"
                         : "bg-muted text-muted-foreground"
-                    }`}
+                      }`}
                   >
                     {step}
                   </div>
                   {step < 3 && (
                     <div
-                      className={`flex-1 h-1 rounded-full transition-colors ${
-                        registerStep > step ? "bg-primary" : "bg-muted"
-                      }`}
+                      className={`flex-1 h-1 rounded-full transition-colors ${registerStep > step ? "bg-primary" : "bg-muted"
+                        }`}
                     />
                   )}
                 </div>

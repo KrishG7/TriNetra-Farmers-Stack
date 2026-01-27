@@ -8,6 +8,7 @@ import { MarketTab } from "./tabs/market-tab"
 import { SoilTab } from "./tabs/soil-vision"
 import { CreditTab } from "./tabs/credit-tab"
 import { useLanguage } from "@/lib/language-context"
+import { ProfileDropdown } from "./profile-dropdown"
 
 type TabType = "dashboard" | "market" | "soil" | "credit"
 
@@ -92,9 +93,7 @@ export function Dashboard() {
               <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
               {t.connected}
             </div>
-            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-sm font-medium">
-              A
-            </div>
+            <ProfileDropdown />
           </div>
         </header>
 
