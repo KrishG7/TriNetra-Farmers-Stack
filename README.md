@@ -115,4 +115,8 @@ TriNetra/
 ├── data/                 # 📂 CSV Data Storage (Market & Soil Data)
 ├── helper_functions/     # 🛠️ Maintenance Scripts (Fix Data, Check AI)
 ├── run.py                # Backend Launcher Script
+<<<<<<< HEAD
 └── train_market_ai.py    # Script to Retrain Price Model
+=======
+└── train_market_ai.py    # Script to Retrain Price Model
+>>>>>>> b1a4d45 (Fix: Add Hackathon Safety Net for Auth and Profile Sync)

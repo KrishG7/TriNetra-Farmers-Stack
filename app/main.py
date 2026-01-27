@@ -3,6 +3,7 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from fastapi import HTTPException
 
 # Import services
 from app.services.gee_service import GEEService
@@ -10,6 +11,8 @@ from app.services.soil_service import SoilService
 from app.services.market_service import MarketService
 from app.models.schemas import Location
 from app.models.schemas import SoilRequest as InternalSoilRequest
+from app.models.schemas import LoginRequest, OTPVerify, FarmerRegister
+from app.services.auth_service import AuthService
 
 # --- LOGGING ---
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +24,10 @@ app = FastAPI(title="TriNetra API", version="2.0.0")
 # --- CORS (Allow Frontend to talk to Backend) ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"], 
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,6 +37,7 @@ app.add_middleware(
 gee_service = GEEService()
 soil_service = SoilService()
 market_service = MarketService()
+auth_service = AuthService()
 
 # --- INPUT MODELS ---
 class CreditRequest(BaseModel):
@@ -94,3 +101,46 @@ async def analyze_soil(data: SoilRequest):
         lang=data.lang
     )
     return soil_service.recommend_crop(req)
+
+# ========================
+# AUTH ROUTES
+# ========================
+
+@app.post("/api/auth/register")
+def register_farmer(data: FarmerRegister):
+    """Register a new farmer."""
+    try:
+        return auth_service.register_farmer(data)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/api/auth/login-otp")
+def request_login_otp(data: LoginRequest):
+    """
+    Step 1 of Login: Check if user exists, then send OTP.
+    Fails if user is NOT registered.
+    """
+    try:
+        return auth_service.send_otp(data.phone)
+    except ValueError as e:
+        # This triggers if phone is not found in farmers.json
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/api/auth/verify-otp")
+def verify_login_otp(data: OTPVerify):
+    """Step 2: Verify OTP and return user profile."""
+    # 🚀 MASTER KEY FOR DEMO: 123456 always works
+    if data.otp == "123456":
+        profile = auth_service.get_farmer_by_phone(data.phone)
+        if not profile:
+             raise HTTPException(status_code=400, detail="User not found")
+        return profile
+
+    # Real verification logic
+    success, msg = auth_service.verify_otp(data.phone, data.otp)
+    if not success:
+        raise HTTPException(status_code=400, detail=msg)
+    
+    # Fetch profile to send back to frontend
+    profile = auth_service.get_farmer_by_phone(data.phone)
+    return profile
