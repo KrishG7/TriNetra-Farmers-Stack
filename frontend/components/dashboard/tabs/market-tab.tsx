@@ -1,5 +1,6 @@
 "use client"
 
+import { API_BASE_URL } from "@/lib/config";
 import { useState, useEffect } from "react"
 import { TrendingUp, Loader2, AlertCircle, Calendar, Package, MapPin, Store } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -23,14 +24,13 @@ import {
 } from "recharts"
 import { useLanguage } from "@/lib/language-context"
 
-// --- TRANSLATIONS (KEPT EXACTLY AS YOU HAD THEM) ---
 const translations: Record<string, any> = {
     en: {
         title: "Market Vision",
         subtitle: "AI-Powered Price Prediction Engine",
         lbl_crop: "Select Crop",
         lbl_state: "Select State",
-        lbl_market: "Select Market (Mandi)", // New Label
+        lbl_market: "Select Market (Mandi)",
         lbl_date: "Forecast Date",
         lbl_qty: "Quantity",
         btn_run: "Run Prediction",
@@ -85,32 +85,28 @@ interface PredictionResult {
     confidence: number
 }
 
-// Type for the dynamic locations
 type LocationMap = Record<string, string[]>
 
 export function MarketTab() {
     const { language } = useLanguage()
     const t = translations[language] || translations["en"]
 
-    // State
     const [crop, setCrop] = useState("")
     const [state, setState] = useState("")
-    const [market, setMarket] = useState("") // New
+    const [market, setMarket] = useState("")
     const [date, setDate] = useState("")
     const [quantity, setQuantity] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const [result, setResult] = useState<PredictionResult | null>(null)
 
-    // Location Data
     const [locations, setLocations] = useState<LocationMap>({})
     const [loadingLocations, setLoadingLocations] = useState(true)
 
-    // 1. Fetch Dynamic Locations (States & Mandis) on Load
     useEffect(() => {
         async function fetchLocations() {
             try {
-                const res = await fetch("http://127.0.0.1:8000/api/market/locations")
+                const res = await fetch(`${API_BASE_URL}/api/market/locations`)
                 if (res.ok) {
                     const data = await res.json()
                     setLocations(data)
@@ -154,7 +150,6 @@ export function MarketTab() {
             const data = await response.json()
             setResult(data)
         } catch {
-            // Demo Fallback (Kept for safety)
             const demoTrend = Array.from({ length: 7 }, (_, i) => ({
                 date: new Date(Date.now() + i * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", {
                     month: "short",
@@ -190,8 +185,6 @@ export function MarketTab() {
 
             <div className="nature-card-elevated rounded-2xl p-6">
                 <div className="flex flex-wrap items-end gap-4">
-
-                    {/* CROP SELECTOR */}
                     <div className="space-y-2 min-w-[160px]">
                         <Label className="text-sm text-muted-foreground flex gap-2 items-center">
                             <Package size={14} /> {t.lbl_crop}
@@ -208,7 +201,6 @@ export function MarketTab() {
                         </Select>
                     </div>
 
-                    {/* STATE SELECTOR (Dynamic) */}
                     <div className="space-y-2 min-w-[160px]">
                         <Label className="text-sm text-muted-foreground flex gap-2 items-center">
                             <MapPin size={14} /> {t.lbl_state}
@@ -225,7 +217,6 @@ export function MarketTab() {
                         </Select>
                     </div>
 
-                    {/* MARKET SELECTOR (Dependent on State) */}
                     <div className="space-y-2 min-w-[160px]">
                         <Label className="text-sm text-muted-foreground flex gap-2 items-center">
                             <Store size={14} /> {t.lbl_market}
@@ -242,7 +233,6 @@ export function MarketTab() {
                         </Select>
                     </div>
 
-                    {/* DATE */}
                     <div className="space-y-2 min-w-[160px]">
                         <Label className="text-sm text-muted-foreground flex items-center gap-2">
                             <Calendar size={14} /> {t.lbl_date}
@@ -250,7 +240,6 @@ export function MarketTab() {
                         <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="bg-background border-border text-foreground" />
                     </div>
 
-                    {/* QUANTITY */}
                     <div className="space-y-2 min-w-[120px]">
                         <Label className="text-sm text-muted-foreground flex items-center gap-2">
                             <Package size={14} /> {t.lbl_qty}

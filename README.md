@@ -97,7 +97,7 @@
     ```bash
     npm run dev
     ```
-    ✅ **Success:** Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+    ✅ **Success:** Open **http://localhost:3000** in your browser.
 
 ---
 

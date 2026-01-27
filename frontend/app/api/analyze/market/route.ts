@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/config";
 
 export async function POST(req: Request) {
   const body = await req.json();
   // Fetch from Python
-  const res = await fetch("http://127.0.0.1:8000/api/analyze/market", {
+  const res = await fetch(`${API_BASE_URL}/api/analyze/market`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // Map UI names to Python names

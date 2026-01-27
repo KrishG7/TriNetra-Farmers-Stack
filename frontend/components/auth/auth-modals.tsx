@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { API_BASE_URL } from "@/lib/config"
 
 interface AuthModalsProps {
   isLoginOpen: boolean
@@ -91,7 +92,7 @@ export function AuthModals({
     setLoginLoading(true)
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/auth/login-otp", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: loginPhone })
@@ -117,7 +118,7 @@ export function AuthModals({
     setLoginLoading(true)
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/auth/verify-otp", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: loginPhone, otp: loginOtp })
@@ -175,7 +176,7 @@ export function AuthModals({
 
     try {
       // 2. 🚀 ACTUALLY CALL THE BACKEND TO SAVE DATA
-      const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
