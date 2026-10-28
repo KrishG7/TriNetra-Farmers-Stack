@@ -1,7 +1,7 @@
 import os
 import glob
 
-DATA_DIR = "data/"
+DATA_DIR = "../data/"
 
 def force_clean_csvs():
     print(f"🧹 Starting Surgical Cleaning in {DATA_DIR}...")

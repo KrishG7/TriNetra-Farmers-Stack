@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌾 TriNetra Frontend
 
-## Getting Started
+The official user interface for **TriNetra: Agri-Intelligence Command Center**. Built with Next.js 14, this dashboard provides farmers with real-time insights into market prices, soil health, and credit eligibility using a clean, accessible, and multi-language interface.
 
-First, run the development server:
+## ⚡️ Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **📊 Market Vision:** Interactive price prediction charts using Recharts. Includes dynamic State/Market selection.
+* **🌱 Soil Vision:** AI Agronomist interface where farmers input N-P-K/pH values to get crop recommendations.
+* **💳 Credit Vision:** Satellite-based verification tool featuring an interactive map (Leaflet) to pinpoint farm locations.
+* **🗣️ Multi-Language Support:** Instant translation switching between English, Hindi, Punjabi, Gujarati, Tamil, Telugu, Bengali, and Marathi.
+* **🔐 Authentication UI:** Complete Login/Register flows with OTP simulation.
+* **📱 Responsive Design:** Fully mobile-optimized landing page and dashboard sidebar.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **UI Components:** [Shadcn UI](https://ui.shadcn.com/) (Radix Primitives)
+* **Icons:** [Lucide React](https://lucide.dev/)
+* **Charts:** [Recharts](https://recharts.org/)
+* **Maps:** [Leaflet](https://leafletjs.com/) (Dynamic Import)
+* **State Management:** React Context (Language Provider)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
+* Node.js 18.17 or later
+* The **TriNetra Backend** running on port `8000`.
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  Install dependencies:
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-## Deploy on Vercel
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔌 API Architecture
+
+This frontend uses **Next.js Route Handlers** (`app/api/analyze/...`) as a proxy layer. It does not call the Python backend directly from the browser to avoid CORS issues and expose API keys.
+
+* **Frontend Request:** `POST /api/analyze/market` (Browser)
+* **Proxy Layer:** Next.js Server
+* **Backend Request:** `POST http://127.0.0.1:8000/api/analyze/market` (Python)
+
+> **Note:** If you change the Python backend port, you must update the URLs in `frontend/app/api/analyze/*/route.ts`.
+
+## 📂 Project Structure
+
+```text
+frontend/
+├── app/
+│   ├── api/             # API Proxy Routes (connects to Python)
+│   ├── dashboard/       # Main Dashboard Layout
+│   ├── layout.tsx       # Global Layout & Font Setup
+│   └── page.tsx         # Landing Page
+├── components/
+│   ├── dashboard/
+│   │   ├── tabs/        # Feature Modules (Market, Soil, Credit)
+│   │   └── sidebar.tsx  # Navigation Logic
+│   ├── landing/         # Landing Page Sections
+│   └── ui/              # Reusable Shadcn Components (Buttons, Inputs)
+├── lib/
+│   └── language-context # Global Translation Logic
+└── public/              # Static Assets

@@ -1,4 +1,12 @@
 import ee
+import sys
+import os
+
+# --- PATH FIX: Allow looking "up" one level to find 'app' ---
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Now the imports will work:
+from app.services.market_service import MarketService # etc...
 
 def check_gee():
     try:

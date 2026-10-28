@@ -32,7 +32,8 @@ class MarketService:
                     torch.nn.Linear(128, 64), torch.nn.ReLU(),
                     torch.nn.Linear(64, 1)
                 )
-                self.model.load_state_dict(torch.load(MODEL_PATH))
+                # Security: Use weights_only=True to prevent arbitrary code execution
+                self.model.load_state_dict(torch.load(MODEL_PATH, weights_only=True))
                 self.model.eval() # Eval mode
                 
                 # 2. Load Scalers
@@ -66,7 +67,8 @@ class MarketService:
                         m = str(market).title().strip()
                         if s not in locations: locations[s] = set()
                         locations[s].add(m)
-            except: pass
+            except Exception as e:
+                logger.warning(f"Failed to process file {file}: {e}")
         
         # Convert sets to sorted lists
         return {k: sorted(list(v)) for k, v in locations.items()}

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { useLanguage } from "@/lib/language-context"
 
 // --- TRANSLATIONS ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const translations: Record<string, any> = {
   en: {
     title: "Soil Vision",
@@ -269,11 +270,10 @@ export function SoilTab() {
           <div className="nature-card-elevated rounded-2xl p-6">
             <h3 className="text-lg font-semibold mb-4">{t.res_status}</h3>
             <div
-              className={`p-4 rounded-xl text-center ${
-                result.cultivable
-                  ? "bg-success/10 text-success"
-                  : "bg-destructive/10 text-destructive"
-              }`}
+              className={`p-4 rounded-xl text-center ${result.cultivable
+                ? "bg-success/10 text-success"
+                : "bg-destructive/10 text-destructive"
+                }`}
             >
               <div className="text-xl font-bold">
                 {result.cultivable ? t.res_cultivable : t.res_not_cultivable}

@@ -120,8 +120,8 @@ class GEEService:
                 if claim > max_yield_limit:
                     over_claim = claim - max_yield_limit
                     penalty = over_claim * 2.5 # Steep penalty for lying
-            except:
-                pass 
+            except ValueError:
+                logger.warning(f"Invalid claimed yield value: {claimed_yield}")
 
         final_score = max(0, min(100, base_score - penalty))
         

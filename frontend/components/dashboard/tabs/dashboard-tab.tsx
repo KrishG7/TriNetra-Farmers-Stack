@@ -5,6 +5,7 @@ import { TrendingUp, Leaf, CreditCard, Activity, ArrowUpRight, ArrowDownRight } 
 import { useLanguage } from "@/lib/language-context"
 
 // --- TRANSLATIONS ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const translations: Record<string, any> = {
   en: {
     title: "Agricultural Insights",

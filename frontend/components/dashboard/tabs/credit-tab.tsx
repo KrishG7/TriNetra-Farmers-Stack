@@ -5,7 +5,7 @@ import {
   CreditCard,
   Loader2,
   AlertCircle,
-  Crosshair, 
+  Crosshair,
   Wheat,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,9 +13,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import dynamic from "next/dynamic"
 import { useLanguage } from "@/lib/language-context"
+import type { CreditTranslations } from "@/lib/types"
 
 // --- TRANSLATIONS ---
-const translations: Record<string, any> = {
+const translations: Record<string, CreditTranslations> = {
   en: {
     title: "Credit Vision",
     subtitle: "Satellite-Based Credit Scoring System",
@@ -93,11 +94,11 @@ export function CreditTab() {
   const [lat, setLat] = useState("28.7041")
   const [lng, setLng] = useState("77.1025")
   const [yieldClaim, setYieldClaim] = useState("")
-  
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [result, setResult] = useState<CreditResult | null>(null)
-  
+
   const [markerPosition, setMarkerPosition] = useState<[number, number]>([28.7041, 77.1025])
   const mapRef = useRef<{ flyTo: (lat: number, lng: number) => void } | null>(null)
 
@@ -129,21 +130,21 @@ export function CreditTab() {
       setError("Geolocation is not supported by your browser")
       return
     }
-    
+
     setLoading(true)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords
         const newLat = latitude.toFixed(6)
         const newLng = longitude.toFixed(6)
-        
+
         setLat(newLat)
         setLng(newLng)
-        
+
         // Update Map
         setMarkerPosition([latitude, longitude])
         mapRef.current?.flyTo(latitude, longitude)
-        
+
         setLoading(false)
         setError("")
       },
@@ -231,14 +232,14 @@ export function CreditTab() {
         {/* Control Panel - Takes up 2 columns */}
         <div className="lg:col-span-2 space-y-4">
           <div className="nature-card-elevated rounded-2xl p-6">
-            
+
             {/* Location Section */}
             <div className="space-y-4 mb-6">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold text-foreground">{t.loc_details}</h3>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={detectLocation}
                   className="text-primary hover:text-primary border-primary/20 hover:bg-primary/5 h-8 text-xs"
                 >
@@ -250,18 +251,18 @@ export function CreditTab() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-xs text-muted-foreground">{t.lbl_lat}</Label>
-                  <Input 
-                    value={lat} 
+                  <Input
+                    value={lat}
                     onChange={(e) => handleManualCoordChange('lat', e.target.value)}
-                    className="bg-background font-mono text-sm" 
+                    className="bg-background font-mono text-sm"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs text-muted-foreground">{t.lbl_lng}</Label>
-                  <Input 
-                    value={lng} 
+                  <Input
+                    value={lng}
                     onChange={(e) => handleManualCoordChange('lng', e.target.value)}
-                    className="bg-background font-mono text-sm" 
+                    className="bg-background font-mono text-sm"
                   />
                 </div>
               </div>
@@ -316,13 +317,12 @@ export function CreditTab() {
               <div className="space-y-4">
                 {/* Status Badge */}
                 <div
-                  className={`p-4 rounded-xl text-center border ${
-                    result.health_score > 60
+                  className={`p-4 rounded-xl text-center border ${result.health_score > 60
                       ? "bg-success/10 text-success border-success/20"
                       : result.health_score > 0
                         ? "bg-warning/10 text-warning border-warning/20"
                         : "bg-destructive/10 text-destructive border-destructive/20"
-                  }`}
+                    }`}
                 >
                   <div className="text-xl font-bold">
                     {result.health_score > 60
@@ -339,13 +339,12 @@ export function CreditTab() {
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">{t.res_score}</span>
                       <span
-                        className={`text-2xl font-bold ${
-                          result.health_score > 60
+                        className={`text-2xl font-bold ${result.health_score > 60
                             ? "text-success"
                             : result.health_score > 0
                               ? "text-warning"
                               : "text-destructive"
-                        }`}
+                          }`}
                       >
                         {result.health_score}/100
                       </span>

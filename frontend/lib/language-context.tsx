@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState, useEffect, useRef } from "react"
 
 type Language = "en" | "hi" | "pb" | "gj" | "ta" | "te" | "bn" | "mr"
 
@@ -14,11 +14,18 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en")
+  const didHydrateRef = useRef(false)
 
-  // Load saved language on startup
+  // Load saved language on startup (client-side only)
   useEffect(() => {
-    const saved = localStorage.getItem("trinetra-lang") as Language
-    if (saved) setLanguageState(saved)
+    if (!didHydrateRef.current) {
+      didHydrateRef.current = true
+      const saved = localStorage.getItem("trinetra-lang")
+      if (saved && ["en", "hi", "pb", "gj", "ta", "te", "bn", "mr"].includes(saved)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Legitimate SSR hydration pattern
+        setLanguageState(saved as Language)
+      }
+    }
   }, [])
 
   // Save language whenever it changes
@@ -28,7 +35,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Helper placeholder
-  const t = (key: string) => key 
+  const t = (key: string) => key
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

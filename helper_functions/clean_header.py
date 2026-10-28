@@ -1,7 +1,7 @@
 import os
 import glob
 
-DATA_DIR = "data/"
+DATA_DIR = "../data/"
 
 def nuclear_fix():
     print(f"☢️  Running Nuclear Fix on {DATA_DIR}...")

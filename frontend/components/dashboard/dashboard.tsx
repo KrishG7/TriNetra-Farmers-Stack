@@ -25,7 +25,7 @@ export function Dashboard() {
 
   const [activeTab, setActiveTab] = useState<TabType>("dashboard")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  
+
   // --- FIX: HYDRATION ERROR STATE ---
   const [timeStr, setTimeStr] = useState<string>("")
 
@@ -37,7 +37,7 @@ export function Dashboard() {
   useEffect(() => {
     // Only set time on the client side after mounting
     setTimeStr(new Date().toLocaleTimeString())
-    
+
     // Optional: Update time every second to make it a real live clock
     const timer = setInterval(() => {
       setTimeStr(new Date().toLocaleTimeString())

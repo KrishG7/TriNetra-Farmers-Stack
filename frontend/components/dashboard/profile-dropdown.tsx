@@ -12,13 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function ProfileDropdown() {
+  // Initialize with null to match server render
   const [user, setUser] = useState<{ name: string; phone: string } | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // 1. Mark component as mounted so we can safely check localStorage
-    setIsMounted(true);
-
+    // Read user from localStorage only on client side after hydration
     const saved = localStorage.getItem("trinetra_user");
     if (saved) {
       try {
@@ -26,12 +24,13 @@ export function ProfileDropdown() {
         // Ensure the data isn't empty
         if (parsed && (parsed.name || parsed.fullName)) {
           // Normalize the name field
+          // eslint-disable-next-line react-hooks/set-state-in-effect -- Legitimate SSR hydration pattern  
           setUser({
             ...parsed,
             name: parsed.name || parsed.fullName
           });
         }
-      } catch (e) {
+      } catch {
         console.error("Failed to parse user data");
       }
     }
@@ -43,12 +42,8 @@ export function ProfileDropdown() {
     window.location.href = "/";
   };
 
-  // 2. Prevent Hydration Mismatch: Don't render until client-side is ready
-  if (!isMounted) {
-    return (
-      <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 animate-pulse" />
-    );
-  }
+  // 2. Prevent Hydration Mismatch: Show loading state until client-side sets user
+  // Note: user is null initially (SSR match), then populated from localStorage
 
   return (
     <DropdownMenu>
@@ -85,8 +80,8 @@ export function ProfileDropdown() {
               <span>Edit Profile</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
-              className="text-destructive focus:bg-destructive/10 cursor-pointer" 
+            <DropdownMenuItem
+              className="text-destructive focus:bg-destructive/10 cursor-pointer"
               onClick={handleLogout}
             >
               <LogOut className="mr-2 h-4 w-4" />

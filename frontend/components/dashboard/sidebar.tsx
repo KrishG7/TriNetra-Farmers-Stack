@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import {
@@ -11,7 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
-  Languages 
+  Languages
 } from "lucide-react"
 import {
   Select,
@@ -21,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useLanguage } from "@/lib/language-context"
+import type { SidebarTranslations } from "@/lib/types"
 
 type TabType = "dashboard" | "market" | "soil" | "credit"
 
@@ -32,7 +32,7 @@ interface SidebarProps {
 }
 
 // --- TRANSLATIONS FOR SIDEBAR ---
-const sidebarTranslations: Record<string, any> = {
+const sidebarTranslations: Record<string, SidebarTranslations> = {
   en: { dashboard: "Dashboard", market: "Market Vision", soil: "Soil Vision", credit: "Credit Vision", home: "Back to Home", system: "System Online" },
   hi: { dashboard: "डैशबोर्ड", market: "बाजार दृष्टि", soil: "मृदा दृष्टि", credit: "क्रेडिट दृष्टि", home: "मुख्य पृष्ठ", system: "सिस्टम सक्रिय" },
   pb: { dashboard: "ਡੈਸ਼ਬੋਰਡ", market: "ਮਾਰਕੀਟ ਵਿਜ਼ਨ", soil: "ਮਿੱਟੀ ਵਿਜ਼ਨ", credit: "ਕ੍ਰੈਡਿਟ ਵਿਜ਼ਨ", home: "ਘਰ ਵਾਪਸ", system: "ਸਿਸਟਮ ਚਾਲੂ" },
@@ -123,27 +123,27 @@ export function Sidebar({ activeTab, onTabChange, collapsed, onToggle }: Sidebar
 
       {/* Footer Area */}
       <div className="px-3 pb-6 space-y-4">
-        
+
         {/* --- LANGUAGE SWITCHER --- */}
         {!collapsed && (
           <div className="px-1">
             <div className="flex items-center gap-2 mb-2 text-xs text-sidebar-foreground/60">
-                <Languages className="h-3 w-3" />
-                <span>Language</span>
+              <Languages className="h-3 w-3" />
+              <span>Language</span>
             </div>
             <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="h-8 bg-sidebar-accent/50 border-sidebar-border text-xs">
-                    <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="en">English</SelectItem>
-                    <SelectItem value="hi">हिंदी (Hindi)</SelectItem>
-                    <SelectItem value="pb">ਪੰਜਾਬੀ (Punjabi)</SelectItem>
-                    <SelectItem value="gj">ગુજરાતી (Gujarati)</SelectItem>
-                    <SelectItem value="ta">தமிழ் (Tamil)</SelectItem>
-                    <SelectItem value="te">తెలుగు (Telugu)</SelectItem>
-                    <SelectItem value="bn">বাংলা (Bengali)</SelectItem>
-                </SelectContent>
+              <SelectTrigger className="h-8 bg-sidebar-accent/50 border-sidebar-border text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="hi">हिंदी (Hindi)</SelectItem>
+                <SelectItem value="pb">ਪੰਜਾਬੀ (Punjabi)</SelectItem>
+                <SelectItem value="gj">ગુજરાતી (Gujarati)</SelectItem>
+                <SelectItem value="ta">தமிழ் (Tamil)</SelectItem>
+                <SelectItem value="te">తెలుగు (Telugu)</SelectItem>
+                <SelectItem value="bn">বাংলা (Bengali)</SelectItem>
+              </SelectContent>
             </Select>
           </div>
         )}

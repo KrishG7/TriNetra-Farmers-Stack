@@ -2,7 +2,7 @@ import os
 import glob
 import pandas as pd
 
-DATA_DIR = "data/"
+DATA_DIR = "../data/"
 
 def fix_corrupted_csvs():
     print(f"🧹 Scanning {DATA_DIR} for corrupted files...")
