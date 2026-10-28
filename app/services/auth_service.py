@@ -1,4 +1,4 @@
-import random
+import secrets
 import logging
 import os
 from google.oauth2 import service_account
@@ -25,11 +25,14 @@ class AuthService:
     OTP_EXPIRY_SECONDS = 300  # 5 minutes
     MAX_OTP_ATTEMPTS = 3
     OTP_COOLDOWN_SECONDS = 60  # Rate limit: 1 OTP per minute
+    REGISTRATION_VERIFY_SECONDS = 600  # a verified phone may register within 10 minutes
     
     def __init__(self):
         self.repo = DataRepository()
         self._otp_store: Dict[str, Dict] = {}  # In-memory OTP cache
         self._otp_cooldown: Dict[str, float] = {}  # Track OTP request rate limiting
+        # Phones whose OTP was verified before they registered (phone -> expiry); consumed by register_farmer
+        self._verified_phones: Dict[str, datetime] = {}
     
     # -------------------------
     # REGISTRATION
@@ -44,6 +47,9 @@ class AuthService:
             existing = self.repo.get_farmer_by_phone(farmer.phone)
             if existing:
                 raise ValueError(f"Farmer with phone {farmer.phone} already registered")
+
+            # Only the owner of the phone may register it: an OTP must have been verified first
+            self._require_verified_phone(farmer.phone)
             
             # Generate farmer ID (phone-based)
             farmer_id = f"FARM_{farmer.phone}_{datetime.utcnow().timestamp():.0f}"
@@ -57,7 +63,7 @@ class AuthService:
                 "phone": farmer.phone,
                 "language": farmer.language,
                 "created_at": datetime.utcnow().isoformat(),
-                "verified": False,  # Requires OTP verification
+                "verified": True,  # the phone was OTP-verified above
             }
             
             # Save to repository
@@ -74,7 +80,15 @@ class AuthService:
     # -------------------------
     # OTP GENERATION
     # -------------------------
-    def send_otp(self, phone: str) -> Dict[str, str]:
+    def send_registration_otp(self, phone: str) -> Dict[str, str]:
+        """Send an OTP to a phone that is not registered yet (step 1 of registration)."""
+        if not self._is_valid_phone(phone):
+            raise ValueError("Invalid phone number format")
+        if self.repo.get_farmer_by_phone(phone):
+            raise ValueError("This phone number is already registered. Please log in instead.")
+        return self.send_otp(phone, require_registered=False)
+
+    def send_otp(self, phone: str, require_registered: bool = True) -> Dict[str, str]:
         """
         Generate and store OTP for phone number.
         Implements rate limiting (1 OTP per minute).
@@ -88,7 +102,7 @@ class AuthService:
             
             # Check if farmer exists
             farmer = self.repo.get_farmer_by_phone(phone)
-            if not farmer:
+            if require_registered and not farmer:
                 raise ValueError("Farmer not registered. Please register first.")
             
             # Rate limiting: prevent OTP spam
@@ -100,7 +114,7 @@ class AuthService:
                 raise ValueError(f"Please wait {wait_time}s before requesting another OTP")
             
             # Generate 6-digit OTP
-            otp = str(random.randint(10**5, 10**6 - 1))
+            otp = str(100000 + secrets.randbelow(900000))
             
             # Store OTP with metadata
             self._otp_store[phone] = {
@@ -176,6 +190,9 @@ class AuthService:
                 farmer["verified"] = True
                 farmer["last_login"] = datetime.utcnow().isoformat()
                 self.repo.add_farmer(farmer)
+            else:
+                # A new user proving they own the phone; register_farmer will consume this
+                self._verified_phones[phone] = datetime.utcnow() + timedelta(seconds=self.REGISTRATION_VERIFY_SECONDS)
             
             # Clean up OTP record after successful verification
             del self._otp_store[phone]
@@ -191,6 +208,11 @@ class AuthService:
     # -------------------------
     # HELPER METHODS
     # -------------------------
+    def _require_verified_phone(self, phone: str) -> None:
+        expires = self._verified_phones.pop(phone, None)
+        if expires is None or datetime.utcnow() > expires:
+            raise ValueError("Please verify your phone number with an OTP before registering.")
+
     def _is_valid_phone(self, phone: str) -> bool:
         """Validate Indian 10-digit phone number."""
         phone = phone.strip()

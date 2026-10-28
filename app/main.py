@@ -24,7 +24,12 @@ app = FastAPI(title="TriNetra API", version="2.0.0")
 # --- CORS (Allow Frontend to talk to Backend) ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -126,18 +131,26 @@ def request_login_otp(data: LoginRequest):
 @app.post("/api/auth/verify-otp")
 def verify_login_otp(data: OTPVerify):
     """Step 2: Verify OTP and return user profile."""
-    # 🚀 MASTER KEY FOR DEMO: 123456 always works
-    if data.otp == "123456":
-        profile = auth_service.get_farmer_by_phone(data.phone)
-        if not profile:
-             raise HTTPException(status_code=400, detail="User not found")
-        return profile
-
-    # Real verification logic
+    # Verify OTP through secure auth service
     success, msg = auth_service.verify_otp(data.phone, data.otp)
     if not success:
         raise HTTPException(status_code=400, detail=msg)
     
     # Fetch profile to send back to frontend
     profile = auth_service.get_farmer_by_phone(data.phone)
+    if not profile:
+        # A new user who has just proven they own this phone; they register next.
+        return {"verified": True, "registered": False}
     return profile
+
+
+@app.post("/api/auth/send-otp")
+def send_registration_otp(data: LoginRequest):
+    """
+    Generate OTP for new user registration.
+    Does NOT require user to exist (unlike login-otp).
+    """
+    try:
+        return auth_service.send_registration_otp(data.phone)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))

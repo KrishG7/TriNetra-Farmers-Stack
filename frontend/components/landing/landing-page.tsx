@@ -39,66 +39,67 @@ import {
 import { useLanguage } from "@/lib/language-context"
 
 // --- TRANSLATION DICTIONARY ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const translations: Record<string, any> = {
-  en: {
-    features: "Features",
-    howItWorks: "How It Works",
-    login: "Login",
-    register: "Register",
-    heroTitle: "Empowering Farmers with",
-    heroHighlight: "Smart Insights",
-    heroDesc: "TriNetra combines satellite imagery, AI predictions, and soil analysis to help Indian farmers make better decisions about crops, markets, and credit.",
-    getStarted: "Get Started Free",
-    learnMore: "Learn More",
-    stats_ai: "AI Models Integrated",
-    stats_states: "States Supported",
-    stats_realtime: "Satellite Analysis",
-    stats_free: "Free for Farmers",
-    featuresTitle: "Three Pillars of Agricultural Intelligence",
-    howWorksTitle: "How TriNetra Works",
-    ctaTitle: "Ready to Transform Your Farm?"
-  },
-  hi: {
-    features: "सुविधाएँ",
-    howItWorks: "यह कैसे काम करता है",
-    login: "लॉग इन करें",
-    register: "पंजीकरण करें",
-    heroTitle: "किसानों को सशक्त बनाना",
-    heroHighlight: "स्मार्ट इनसाइट्स के साथ",
-    heroDesc: "त्रिनेत्र फसल, बाजार और ऋण के बारे में बेहतर निर्णय लेने में भारतीय किसानों की मदद करने के लिए उपग्रह इमेजरी, एआई भविष्यवाणियों और मिट्टी के विश्लेषण को जोड़ता है।",
-    getStarted: "मुफ्त में शुरू करें",
-    learnMore: "और अधिक जानें",
-    stats_ai: "एआई मॉडल एकीकृत",
-    stats_states: "राज्य समर्थित",
-    stats_realtime: "उपग्रह विश्लेषण",
-    stats_free: "किसानों के लिए मुफ्त",
-    featuresTitle: "कृषि बुद्धिमत्ता के तीन स्तंभ",
-    howWorksTitle: "त्रिनेत्र कैसे काम करता है",
-    ctaTitle: "क्या आप अपने खेत को बदलने के लिए तैयार हैं?"
-  },
-  pb: {
-    features: "ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
-    howItWorks: "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
-    login: "ਲੌਗ ਇਨ",
-    register: "ਰਜਿਸਟਰ ਕਰੋ",
-    heroTitle: "ਕਿਸਾਨਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਉਣਾ",
-    heroHighlight: "ਸਮਾਰਟ ਜਾਣਕਾਰੀ ਨਾਲ",
-    heroDesc: "ਟ੍ਰਾਈਨੇਤਰਾ ਭਾਰਤੀ ਕਿਸਾਨਾਂ ਨੂੰ ਫਸਲਾਂ, ਮੰਡੀਆਂ ਅਤੇ ਕਰਜ਼ੇ ਬਾਰੇ ਬਿਹਤਰ ਫੈਸਲੇ ਲੈਣ ਵਿੱਚ ਮਦਦ ਕਰਨ ਲਈ ਸੈਟੇਲਾਈਟ ਚਿੱਤਰਾਂ ਅਤੇ AI ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ।",
-    getStarted: "ਮੁਫਤ ਸ਼ੁਰੂ ਕਰੋ",
-    learnMore: "ਹੋਰ ਜਾਣੋ",
-    stats_ai: "AI ਮਾਡਲ ਏਕੀਕ੍ਰਿਤ",
-    stats_states: "ਰਾਜ ਸਮਰਥਿਤ",
-    stats_realtime: "ਸੈਟੇਲਾਈਟ ਵਿਸ਼ਲੇਸ਼ਣ",
-    stats_free: "ਕਿਸਾਨਾਂ ਲਈ ਮੁਫਤ",
-    featuresTitle: "ਖੇਤੀਬਾੜੀ ਖੁਫੀਆ ਜਾਣਕਾਰੀ ਦੇ ਤਿੰਨ ਥੰਮ੍ਹ",
-    howWorksTitle: "ਟ੍ਰਾਈਨੇਤਰਾ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
-    ctaTitle: "ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਖੇਤ ਨੂੰ ਬਦਲਣ ਲਈ ਤਿਆਰ ਹੋ?"
-  },
-  gj: { features: "વૈશિષ્ટ્યો", howItWorks: "કામગીરી", login: "લૉગ ઇન", register: "રજીસ્ટર", heroTitle: "ખેડૂતોને સશક્તિકરણ", heroHighlight: "સ્માર્ટ માહિતી", heroDesc: "ત્રિનેત્ર ખેડૂતોને મદદ કરે છે...", getStarted: "શરૂ કરો", learnMore: "વધુ જાણો", stats_ai: "AI મોડલ્સ", stats_states: "રાજ્યો", stats_realtime: "સેટેલાઇટ વિશ્લેષણ", stats_free: "મફત સેવા", featuresTitle: "ત્રણ આધારસ્તંભો", howWorksTitle: "કેવી રીતે કામ કરે છે", ctaTitle: "તૈયાર છો?" },
-  mr: { features: "वैशिष्ट्ये", howItWorks: "कार्यपद्धती", login: "लॉगिन", register: "नोंदणी", heroTitle: "शेतकऱ्यांना सक्षम करणे", heroHighlight: "स्मार्ट माहितीद्वारे", heroDesc: "त्रिनेत्र शेतकऱ्यांना मदत करते...", getStarted: "सुरू करा", learnMore: "अधिक जाणून घ्या", stats_ai: "AI मॉडेल्स", stats_states: "राज्ये", stats_realtime: "उपग्रह विश्लेषण", stats_free: "मोफत सेवा", featuresTitle: "तीन आधारस्तंभ", howWorksTitle: "कसे कार्य करते", ctaTitle: "तयार आहात?" },
-  ta: { features: "அம்சங்கள்", howItWorks: "எப்படி வேலை செய்கிறது", login: "உள்நுழைய", register: "பதிவு", heroTitle: "விவசாயிகளுக்கு அதிகாரம்", heroHighlight: "ஸ்மார்ட் நுண்ணறிவு", heroDesc: "ட்ரைநெட்ரா விவசாயிகளுக்கு உதவுகிறது...", getStarted: "தொடங்கவும்", learnMore: "மேலும் அறிய", stats_ai: "AI மாதிரிகள்", stats_states: "மாநிலங்கள்", stats_realtime: "செயற்கைக்கோள்", stats_free: "இலவசம்", featuresTitle: "மூன்று தூண்கள்", howWorksTitle: "எப்படி வேலை செய்கிறது", ctaTitle: "தயாரா?" },
-  te: { features: "లక్షణాలు", howItWorks: "ఇది ఎలా పనిచేస్తుంది", login: "లాగిన్", register: "నమోదు", heroTitle: "రైతులకు సాధికారత", heroHighlight: "స్మార్ట్ ఇన్సైట్స్", heroDesc: "ట్రైనేత్రా రైతులకు సహాయపడుతుంది...", getStarted: "ప్రారంభించండి", learnMore: "మరింత తెలుసుకోండి", stats_ai: "AI నమూనాలు", stats_states: "రాష్ట్రాలు", stats_realtime: "ఉపగ్రహ విశ్లేషణ", stats_free: "ఉచితం", featuresTitle: "మూడు స్తంభాలు", howWorksTitle: "ఎలా పనిచేస్తుంది", ctaTitle: "సిద్ధంగా ఉన్నారా?" },
-  bn: { features: "বৈশিষ্ট্য", howItWorks: "কিভাবে কাজ করে", login: "লগইন", register: "নিবন্ধন", heroTitle: "কৃষকদের ক্ষমতায়ন", heroHighlight: "স্মার্ট ইনসাইট", heroDesc: "ত্রিনেত্র কৃষকদের সাহায্য করে...", getStarted: "শুরু করুন", learnMore: "আরও জানুন", stats_ai: "AI মডেল", stats_states: "রাজ্য", stats_realtime: "স্যাটেলাইট বিশ্লেষণ", stats_free: "বিনামূল্যে", featuresTitle: "তিনটি স্তম্ভ", howWorksTitle: "কিভাবে কাজ করে", ctaTitle: "প্রস্তুত?" },
+    en: {
+        features: "Features",
+        howItWorks: "How It Works",
+        login: "Login",
+        register: "Register",
+        heroTitle: "Empowering Farmers with",
+        heroHighlight: "Smart Insights",
+        heroDesc: "TriNetra combines satellite imagery, AI predictions, and soil analysis to help Indian farmers make better decisions about crops, markets, and credit.",
+        getStarted: "Get Started Free",
+        learnMore: "Learn More",
+        stats_ai: "AI Models Integrated",
+        stats_states: "States Supported",
+        stats_realtime: "Satellite Analysis",
+        stats_free: "Free for Farmers",
+        featuresTitle: "Three Pillars of Agricultural Intelligence",
+        howWorksTitle: "How TriNetra Works",
+        ctaTitle: "Ready to Transform Your Farm?"
+    },
+    hi: {
+        features: "सुविधाएँ",
+        howItWorks: "यह कैसे काम करता है",
+        login: "लॉग इन करें",
+        register: "पंजीकरण करें",
+        heroTitle: "किसानों को सशक्त बनाना",
+        heroHighlight: "स्मार्ट इनसाइट्स के साथ",
+        heroDesc: "त्रिनेत्र फसल, बाजार और ऋण के बारे में बेहतर निर्णय लेने में भारतीय किसानों की मदद करने के लिए उपग्रह इमेजरी, एआई भविष्यवाणियों और मिट्टी के विश्लेषण को जोड़ता है।",
+        getStarted: "मुफ्त में शुरू करें",
+        learnMore: "और अधिक जानें",
+        stats_ai: "एआई मॉडल एकीकृत",
+        stats_states: "राज्य समर्थित",
+        stats_realtime: "उपग्रह विश्लेषण",
+        stats_free: "किसानों के लिए मुफ्त",
+        featuresTitle: "कृषि बुद्धिमत्ता के तीन स्तंभ",
+        howWorksTitle: "त्रिनेत्र कैसे काम करता है",
+        ctaTitle: "क्या आप अपने खेत को बदलने के लिए तैयार हैं?"
+    },
+    pb: {
+        features: "ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ",
+        howItWorks: "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+        login: "ਲੌਗ ਇਨ",
+        register: "ਰਜਿਸਟਰ ਕਰੋ",
+        heroTitle: "ਕਿਸਾਨਾਂ ਨੂੰ ਸ਼ਕਤੀਸ਼ਾਲੀ ਬਣਾਉਣਾ",
+        heroHighlight: "ਸਮਾਰਟ ਜਾਣਕਾਰੀ ਨਾਲ",
+        heroDesc: "ਟ੍ਰਾਈਨੇਤਰਾ ਭਾਰਤੀ ਕਿਸਾਨਾਂ ਨੂੰ ਫਸਲਾਂ, ਮੰਡੀਆਂ ਅਤੇ ਕਰਜ਼ੇ ਬਾਰੇ ਬਿਹਤਰ ਫੈਸਲੇ ਲੈਣ ਵਿੱਚ ਮਦਦ ਕਰਨ ਲਈ ਸੈਟੇਲਾਈਟ ਚਿੱਤਰਾਂ ਅਤੇ AI ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ।",
+        getStarted: "ਮੁਫਤ ਸ਼ੁਰੂ ਕਰੋ",
+        learnMore: "ਹੋਰ ਜਾਣੋ",
+        stats_ai: "AI ਮਾਡਲ ਏਕੀਕ੍ਰਿਤ",
+        stats_states: "ਰਾਜ ਸਮਰਥਿਤ",
+        stats_realtime: "ਸੈਟੇਲਾਈਟ ਵਿਸ਼ਲੇਸ਼ਣ",
+        stats_free: "ਕਿਸਾਨਾਂ ਲਈ ਮੁਫਤ",
+        featuresTitle: "ਖੇਤੀਬਾੜੀ ਖੁਫੀਆ ਜਾਣਕਾਰੀ ਦੇ ਤਿੰਨ ਥੰਮ੍ਹ",
+        howWorksTitle: "ਟ੍ਰਾਈਨੇਤਰਾ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+        ctaTitle: "ਕੀ ਤੁਸੀਂ ਆਪਣੇ ਖੇਤ ਨੂੰ ਬਦਲਣ ਲਈ ਤਿਆਰ ਹੋ?"
+    },
+    gj: { features: "વૈશિષ્ટ્યો", howItWorks: "કામગીરી", login: "લૉગ ઇન", register: "રજીસ્ટર", heroTitle: "ખેડૂતોને સશક્તિકરણ", heroHighlight: "સ્માર્ટ માહિતી", heroDesc: "ત્રિનેત્ર ખેડૂતોને મદદ કરે છે...", getStarted: "શરૂ કરો", learnMore: "વધુ જાણો", stats_ai: "AI મોડલ્સ", stats_states: "રાજ્યો", stats_realtime: "સેટેલાઇટ વિશ્લેષણ", stats_free: "મફત સેવા", featuresTitle: "ત્રણ આધારસ્તંભો", howWorksTitle: "કેવી રીતે કામ કરે છે", ctaTitle: "તૈયાર છો?" },
+    mr: { features: "वैशिष्ट्ये", howItWorks: "कार्यपद्धती", login: "लॉगिन", register: "नोंदणी", heroTitle: "शेतकऱ्यांना सक्षम करणे", heroHighlight: "स्मार्ट माहितीद्वारे", heroDesc: "त्रिनेत्र शेतकऱ्यांना मदत करते...", getStarted: "सुरू करा", learnMore: "अधिक जाणून घ्या", stats_ai: "AI मॉडेल्स", stats_states: "राज्ये", stats_realtime: "उपग्रह विश्लेषण", stats_free: "मोफत सेवा", featuresTitle: "तीन आधारस्तंभ", howWorksTitle: "कसे कार्य करते", ctaTitle: "तयार आहात?" },
+    ta: { features: "அம்சங்கள்", howItWorks: "எப்படி வேலை செய்கிறது", login: "உள்நுழைய", register: "பதிவு", heroTitle: "விவசாயிகளுக்கு அதிகாரம்", heroHighlight: "ஸ்மார்ட் நுண்ணறிவு", heroDesc: "ட்ரைநெட்ரா விவசாயிகளுக்கு உதவுகிறது...", getStarted: "தொடங்கவும்", learnMore: "மேலும் அறிய", stats_ai: "AI மாதிரிகள்", stats_states: "மாநிலங்கள்", stats_realtime: "செயற்கைக்கோள்", stats_free: "இலவசம்", featuresTitle: "மூன்று தூண்கள்", howWorksTitle: "எப்படி வேலை செய்கிறது", ctaTitle: "தயாரா?" },
+    te: { features: "లక్షణాలు", howItWorks: "ఇది ఎలా పనిచేస్తుంది", login: "లాగిన్", register: "నమోదు", heroTitle: "రైతులకు సాధికారత", heroHighlight: "స్మార్ట్ ఇన్సైట్స్", heroDesc: "ట్రైనేత్రా రైతులకు సహాయపడుతుంది...", getStarted: "ప్రారంభించండి", learnMore: "మరింత తెలుసుకోండి", stats_ai: "AI నమూనాలు", stats_states: "రాష్ట్రాలు", stats_realtime: "ఉపగ్రహ విశ్లేషణ", stats_free: "ఉచితం", featuresTitle: "మూడు స్తంభాలు", howWorksTitle: "ఎలా పనిచేస్తుంది", ctaTitle: "సిద్ధంగా ఉన్నారా?" },
+    bn: { features: "বৈশিষ্ট্য", howItWorks: "কিভাবে কাজ করে", login: "লগইন", register: "নিবন্ধন", heroTitle: "কৃষকদের ক্ষমতায়ন", heroHighlight: "স্মার্ট ইনসাইট", heroDesc: "ত্রিনেত্র কৃষকদের সাহায্য করে...", getStarted: "শুরু করুন", learnMore: "আরও জানুন", stats_ai: "AI মডেল", stats_states: "রাজ্য", stats_realtime: "স্যাটেলাইট বিশ্লেষণ", stats_free: "বিনামূল্যে", featuresTitle: "তিনটি স্তম্ভ", howWorksTitle: "কিভাবে কাজ করে", ctaTitle: "প্রস্তুত?" },
 }
 
 const features = [
@@ -157,45 +158,155 @@ export function LandingPage() {
     })
     const [regOtpSent, setRegOtpSent] = useState(false)
     const [regOtp, setRegOtp] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
+
+    // API endpoint for backend
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
 
     const handleSendOtp = async () => {
         if (loginPhone.length !== 10) return
         setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setOtpSent(true)
-        setIsLoading(false)
+        setErrorMessage("")
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/login-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone: loginPhone })
+            })
+
+            if (!res.ok) {
+                const err = await res.json()
+                setErrorMessage(err.detail || "User not found. Please register first!")
+                setIsLoading(false)
+                return
+            }
+
+            setOtpSent(true)
+        } catch {
+            setErrorMessage("Connection error. Make sure backend is running on port 8000!")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const handleLogin = async () => {
         if (otp.length !== 6) return
         setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setIsLoading(false)
-        setLoginOpen(false)
-        window.location.href = "/dashboard"
+        setErrorMessage("")
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone: loginPhone, otp: otp })
+            })
+
+            if (!res.ok) {
+                const err = await res.json()
+                setErrorMessage(err.detail || "Invalid OTP. Please try again.")
+                setIsLoading(false)
+                return
+            }
+
+            const userData = await res.json()
+            localStorage.setItem("trinetra_user", JSON.stringify(userData))
+            setLoginOpen(false)
+            window.location.href = "/dashboard"
+        } catch {
+            setErrorMessage("Verification failed. Please try again.")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const handleRegSendOtp = async () => {
         if (regForm.phone.length !== 10) return
         setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setRegOtpSent(true)
-        setIsLoading(false)
+        setErrorMessage("")
+
+        try {
+            // For registration, we generate OTP on client-side for demo 
+            // In production, this would call an actual SMS service
+            const res = await fetch(`${API_BASE_URL}/api/auth/send-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone: regForm.phone })
+            })
+
+            if (!res.ok) {
+                const err = await res.json()
+                setErrorMessage(err.detail || "Failed to send OTP")
+                setIsLoading(false)
+                return
+            }
+
+            setRegOtpSent(true)
+        } catch {
+            setErrorMessage("Connection error. Make sure backend is running!")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const handleRegister = async () => {
         if (regOtp.length !== 6) return
         setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        setIsLoading(false)
-        setRegisterOpen(false)
-        window.location.href = "/dashboard"
+        setErrorMessage("")
+
+        try {
+            // First verify the OTP
+            const verifyRes = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ phone: regForm.phone, otp: regOtp })
+            })
+
+            if (!verifyRes.ok) {
+                const err = await verifyRes.json()
+                setErrorMessage(err.detail || "Invalid OTP. Please try again.")
+                setIsLoading(false)
+                return
+            }
+
+            // Register the user
+            const payload = {
+                name: regForm.fullName,
+                phone: regForm.phone,
+                state: regForm.state,
+                district: regForm.district,
+                language: "en"
+            }
+
+            const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+
+            if (!res.ok) {
+                const err = await res.json()
+                setErrorMessage(err.detail || "Registration failed. Please try again.")
+                setIsLoading(false)
+                return
+            }
+
+            const userData = await res.json()
+            localStorage.setItem("trinetra_user", JSON.stringify(userData))
+            setRegisterOpen(false)
+            window.location.href = "/dashboard"
+        } catch {
+            setErrorMessage("Registration failed. Please try again.")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     const resetLoginForm = () => {
         setLoginPhone("")
         setOtp("")
         setOtpSent(false)
+        setErrorMessage("")
     }
 
     const resetRegForm = () => {
@@ -204,6 +315,7 @@ export function LandingPage() {
         })
         setRegOtp("")
         setRegOtpSent(false)
+        setErrorMessage("")
     }
 
     return (
@@ -285,7 +397,7 @@ export function LandingPage() {
                 {mobileMenuOpen && (
                     <div className="md:hidden bg-background border-b border-border">
                         <div className="px-4 py-4 space-y-4">
-                            
+
                             {/* Mobile Language Selector */}
                             <div className="mb-4">
                                 <Label>Select Language</Label>

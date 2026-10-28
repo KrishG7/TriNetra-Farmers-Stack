@@ -125,7 +125,7 @@ export function AuthModals({
       })
 
       if (!res.ok) {
-        alert("Invalid OTP (Hint: Try 123456)")
+        alert("Invalid OTP. Please check the code and try again.")
         setLoginLoading(false)
         return
       }
