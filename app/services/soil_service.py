@@ -12,7 +12,7 @@ class SoilService:
             print(f"DEBUG: API Key available? {'Yes' if settings.GEMINI_API_KEY else 'No'}")
             
             genai.configure(api_key=settings.GEMINI_API_KEY)
-            self.model = genai.GenerativeModel("gemini-2.5-flash")
+            self.model = genai.GenerativeModel(settings.GEMINI_MODEL)
             logger.info("✓ Gemini AI Connected (Soil Service)")
         except Exception as e:
             # DEBUG LINE: Print the actual error
@@ -135,7 +135,8 @@ class SoilService:
         """
         Generates realistic fake data if the AI fails, roughly translated.
         """
-        msg = f"AI Offline (System Error: {error_msg})"
+        logger.warning(f"Soil AI unavailable, serving simulated fallback: {error_msg}")
+        msg = "AI is offline right now: these are simulated fallback values, not a real recommendation."
         expl = "Using historical data for your district due to connection failure."
         
         # Simple hardcoded translations for the Fallback Message

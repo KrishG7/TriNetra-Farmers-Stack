@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     # We give it a default value ("") so the app doesn't crash on startup.
     # If it's missing, you'll just get a "Gemini Init Failed" log instead of a hard crash.
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    # Google retires named models; set GEMINI_MODEL instead of editing code.
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
     GOOGLE_APPLICATION_CREDENTIALS: str = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "service_account.json")
 
     # --- Paths ---
