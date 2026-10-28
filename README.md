@@ -8,14 +8,17 @@
 ![Stack](https://img.shields.io/badge/Stack-Next.js_14_|_FastAPI_|_PyTorch-blue?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-gray?style=flat-square)
 
+![Market Vision: a wheat price forecast with a 7-day trend](docs/market-vision.png)
+
 ---
 
 ## 🌟 Core Intelligence Modules
 
 ### 1. 📊 Market Vision (Price Prediction)
 * **Problem:** Farmers sell low because they don't know future market rates.
-* **Solution:** A custom **PyTorch Neural Network** trained on 2 years of Agmarknet data.
-* **Feature:** Predicts crop prices 7 days into the future with 87% accuracy, factoring in seasonality and inflation.
+* **Solution:** A small **PyTorch neural network** that maps (crop, state, date) to a price. Starting prices come from the Agmarknet CSVs in `data/`.
+* **Feature:** A 7-day price trend and a hold / sell hint, with seasonality and inflation built in.
+* **Limits (read this):** the two-year history the model trains on is *generated* by `train_market_ai.py` from a harvest calendar, a linear inflation term and random noise, not taken from real mandi time series. It has not been checked against real prices, so there is no accuracy figure. The `confidence` value the API returns is a fixed placeholder.
 
 ### 2. 🌱 Soil Vision (AI Agronomist)
 * **Problem:** Soil reports are complex scientific data that farmers can't read.
@@ -48,7 +51,7 @@
 ## 🚀 Quick Start Guide
 
 ### Prerequisites
-* **Python** 3.9+
+* **Python** 3.11 (the version this was last run on)
 * **Node.js** 18+
 * **Google Gemini API Key** (for Soil Vision)
 
@@ -56,7 +59,7 @@
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/KrishG7/TriNetra-Farmers-Stack.git](https://github.com/KrishG7/TriNetra-Farmers-Stack.git)
+    git clone https://github.com/KrishG7/TriNetra-Farmers-Stack.git
     cd TriNetra-Farmers-Stack
     ```
 
@@ -98,6 +101,22 @@
     npm run dev
     ```
     ✅ **Success:** Open **http://localhost:3000** in your browser.
+
+---
+
+## 🔎 Current status
+
+Checked by running the backend and the frontend (Next.js build passes, no console errors, Market Vision works end to end):
+
+| Area | State |
+|---|---|
+| Market Vision | Works. Forecasts come from a model trained on generated data (see above), and any state or crop is answered, including ones the model does not know (it falls back to a simulation). |
+| Soil Vision | Needs `GEMINI_API_KEY`. |
+| Credit Vision | Needs a Google Earth Engine `service_account.json` in the project root. Without it the backend logs `GEE Init Failed ... Switching to Mock Mode`, so scores are not satellite-derived. |
+| Dashboard overview | The summary numbers, uptime and news items are static placeholders in `dashboard-tab.tsx`, not live data. |
+| Tests | None yet. `npm run lint` reports 3 type errors. |
+
+`service_account.json` and `.env` are in `.gitignore`. Never commit them.
 
 ---
 
