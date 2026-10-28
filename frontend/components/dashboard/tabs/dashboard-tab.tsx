@@ -182,6 +182,11 @@ export function DashboardTab() {
         />
       </div>
 
+      <p className="-mt-3 text-xs text-muted-foreground">
+        Demo content: the figures above and the headlines below are placeholders, not live data.
+        Market, Soil and Credit Vision are the working modules.
+      </p>
+
       {/* Quick Actions */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Market Vision Card */}

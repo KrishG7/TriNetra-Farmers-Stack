@@ -29,6 +29,11 @@ export function Dashboard() {
   // --- FIX: HYDRATION ERROR STATE ---
   const [timeStr, setTimeStr] = useState<string>("")
 
+  // On phones the full sidebar would cover the page, so start with the narrow icon rail.
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) setSidebarCollapsed(true)
+  }, [])
+
   useEffect(() => {
     // Only set time on the client side after mounting
     setTimeStr(new Date().toLocaleTimeString())
@@ -70,12 +75,12 @@ export function Dashboard() {
       {/* Main Content */}
       <main
         className={cn(
-          "min-h-screen transition-all duration-300 p-6",
+          "min-h-screen min-w-0 transition-all duration-300 p-3 md:p-6",
           sidebarCollapsed ? "ml-20" : "ml-64"
         )}
       >
         {/* Top Bar */}
-        <header className="nature-card-elevated rounded-2xl p-4 mb-6 flex items-center justify-between">
+        <header className="nature-card-elevated rounded-2xl p-3 md:p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-success animate-pulse" />

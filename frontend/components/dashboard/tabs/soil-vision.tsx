@@ -62,6 +62,9 @@ const translations: Record<string, any> = {
   }
 }
 
+// The AI sometimes returns the unit with the value ("45 kg/acre"); show it only once.
+const dose = (v: string) => String(v).replace(/\s*kg\s*\/\s*acre\s*$/i, "")
+
 interface CropRecommendation {
   crop: string
   confidence: "High" | "Medium" | "Low"
@@ -295,9 +298,9 @@ export function SoilTab() {
                   </span>
 
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Urea: {crop.urea_dose} kg/acre <br />
-                    DAP: {crop.dap_dose} kg/acre <br />
-                    MOP: {crop.mop_dose} kg/acre
+                    Urea: {dose(crop.urea_dose)} kg/acre <br />
+                    DAP: {dose(crop.dap_dose)} kg/acre <br />
+                    MOP: {dose(crop.mop_dose)} kg/acre
                   </p>
                   <p className="mt-2 text-xs text-muted-foreground">{crop.reason}</p>
                 </div>
